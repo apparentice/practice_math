@@ -58,10 +58,10 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        //ndk.abiFilters 'armeabi-v7a','arm64-v8a','x86','x86_64'
+        ndk.abiFilters 'armeabi-v7a','arm64-v8a','x86','x86_64'
     }
 
-    splits {
+    /*splits {
         // Configures multiple APKs based on ABI.
         abi {
             // Enables building multiple APKs per ABI.
@@ -78,7 +78,7 @@ android {
             // Specifies that we do not want to also generate a universal APK that includes all ABIs.
             universalApk false
         }
-    }
+    }*/
 
     buildTypes {
         release {
