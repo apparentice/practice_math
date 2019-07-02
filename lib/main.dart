@@ -198,7 +198,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
               });
             },
             child: Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: const EdgeInsets.all(16.0),
               child: Icon(Icons.help_outline, color : Colors.white),
             )
         )
