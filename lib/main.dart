@@ -99,18 +99,29 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
     );
   }
 
+  TextStyle buildTextStyleBlack( double fontSize ) {
+    return TextStyle(
+      fontFamily: 'VarelaRound-Regular',
+      fontSize: fontSize,
+      color: Colors.black,
+    );
+  }
+
+  TextStyle buildTextStyleGreen( double fontSize ) {
+    return TextStyle(
+      fontFamily: 'VarelaRound-Regular',
+      fontSize: fontSize,
+      color: Colors.green,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
 
     return AnimatedBuilder(
         animation: _controller,
         builder: (context, child) { return Scaffold(
-            appBar: AppBar(
-              elevation: 8,
-              backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
-              title: Text(widget.title,
-                style: buildTextStyle(22),),
-            ),
+            appBar: _buildAppBar(context),
             body: Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -150,6 +161,48 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
               buttonText: _buttonText,)
         );
         }
+    );
+  }
+
+  AppBar _buildAppBar(BuildContext context) {
+    return AppBar(
+      elevation: 8,
+      backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
+      title: Text(widget.title,
+        style: buildTextStyle(22),),
+      actions: <Widget>[
+        GestureDetector(
+            onTap: (){
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context)
+              {
+                return AlertDialog(
+                  title: Text("How to..?", style: buildTextStyleGreen(18),),
+                  elevation: 20,
+                  content: Text(
+                      "1. Drag and drop options from below to appropriate question cards displayed."
+                          "\n\n2. Click \"Check now\" once done.",),
+                  actions: <Widget>[
+                    GestureDetector(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text("Okay", style: buildTextStyleGreen(16),),
+                      ),
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                    )
+                  ],
+                );
+              });
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Icon(Icons.help_outline, color : Colors.white),
+            )
+        )
+      ],
     );
   }
 
@@ -297,7 +350,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                     color:  isCorrect ? Colors.green : Colors.red,
                   ),
                   ),
-                  Text("The solution is :\n" + solution, style: buildTextStyle(16),),
+                  Expanded(child: Text("The solution is :\n" + solution, style: buildTextStyle(16),)),
                 ],
               )),
         ),
